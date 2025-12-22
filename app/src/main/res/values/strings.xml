@@ -1,3 +1,33 @@
 <resources>
-    <string name="app_name">Erst App</string>
+    <string name="app_name">erst app</string>
+    <string name="workout_title">Trainingsplan</string>
+    <string name="workout_heavy">Intensiver Trainingsplan (Uper  / Lower )</string>
+    <string name="weight_height"> Gevicht: %1$d kg\n %2$d cm</string>
+    <string name="workout_light">
+Leichter Trainingsplan:
+3x Ganzkörpertraining pro Woche
++ leichtes Cardio
+</string>
+
+    <string name="workout_medium">
+Mittlerer Trainingsplan:
+Push / Pull / Beine
+3–4 Trainingstage pro Woche
+</string>
+
+    <string name="workout_cut">
+Trainingsplan für Fettabbau:
+Krafttraining + Cardio
+4–5 Trainingstage pro Woche
+</string>
+
+    <string name="workout_bulk">
+Trainingsplan für Muskelaufbau:
+Schwere Grundübungen
+Progressive Steigerung
+4 Trainingstage pro Woche
+</string>
+    <string name="goal_label">Ziel</string>
+    <string name="goal_cut">Abnehmen</string>
+    <string name="goal_bulk">Muskel aufbau</string>
 </resources>
