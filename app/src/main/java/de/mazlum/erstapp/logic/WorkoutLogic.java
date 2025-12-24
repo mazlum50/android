@@ -1,53 +1,93 @@
 package de.mazlum.erstapp.logic;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+import de.mazlum.erstapp.model.Exercise;
+import de.mazlum.erstapp.model.VmpCategory;
+import de.mazlum.erstapp.model.WorkoutDay;
 import de.mazlum.erstapp.model.WorkoutPlan;
 
 public class WorkoutLogic {
-    public static WorkoutPlan getWorkoutPlan (VmpCategory vmpCategory ){
-       switch (vmpCategory) {
-           case MUSCLE_BUILD:
-               return new WorkoutPlan(
-                       "Muskelaufbau",
-                       "3x pro Woche",
-                       "Grundübungen (Ganzkörper)",
-                       "8–12 Wiederholungen, progressive Steigerung"
-               );
-
-           case RECOMP:
-               return new WorkoutPlan(
-                       "Rekomposition",
-                       "4x pro Woche",
-                       "Upper / Lower Split",
-                       "Krafttraining + leichtes Cardio"
-               );
-
-           case FAT_LOSS:
-               return new WorkoutPlan(
-                       "Fettabbau",
-                       "4–5x pro Woche",
-                       "Zirkeltraining + Cardio",
-                       "Kurze Pausen, hohe Intensität"
-               );
-
-           default:
-               return null;
-       }
-    }
-    public static String getVmpTitleDe(VmpCategory category) {
+    public static WorkoutPlan getWorkoutPlan(VmpCategory category) {
 
         switch (category) {
 
             case MUSCLE_BUILD:
-                return "Muskelaufbau";
+                return buildMusclePlan();
 
             case RECOMP:
-                return "Rekomposition";
+                return buildRecompPlan();
 
             case FAT_LOSS:
-                return "Fettabbau";
+                return buildFatLossPlan();
 
             default:
-                return "";
+                throw new IllegalStateException("Unknown VMP category");
         }
+    }
+
+    private static WorkoutPlan buildMusclePlan() {
+
+        List<WorkoutDay> days = new ArrayList<>();
+
+        days.add(new WorkoutDay(
+                "Tag 1 – Ganzkörper",
+                Arrays.asList(
+                        new Exercise("Kniebeugen", 4, 8),
+                        new Exercise("Bankdrücken", 4, 8),
+                        new Exercise("Rudern", 3, 10)
+                )
+        ));
+
+        days.add(new WorkoutDay(
+                "Tag 2 – Ganzkörper",
+                Arrays.asList(
+                        new Exercise("Kreuzheben", 3, 5),
+                        new Exercise("Schulterdrücken", 4, 8),
+                        new Exercise("Klimmzüge", 3, 8)
+                )
+        ));
+
+        return new WorkoutPlan("Muskelaufbau", days);
+    }
+
+    private static WorkoutPlan buildRecompPlan() {
+
+        List<WorkoutDay> days = new ArrayList<>();
+
+        days.add(new WorkoutDay(
+                "Tag 1 – Oberkörper",
+                Arrays.asList(
+                        new Exercise("Bankdrücken", 4, 8),
+                        new Exercise("Latzug", 3, 10)
+                )
+        ));
+
+        days.add(new WorkoutDay(
+                "Tag 2 – Unterkörper",
+                Arrays.asList(
+                        new Exercise("Beinpresse", 4, 10),
+                        new Exercise("Beinbeuger", 3, 12)
+                )
+        ));
+
+        return new WorkoutPlan("Rekomposition", days);
+    }
+
+    private static WorkoutPlan buildFatLossPlan() {
+
+        List<WorkoutDay> days = new ArrayList<>();
+
+        days.add(new WorkoutDay(
+                "Tag 1 – Zirkel",
+                Arrays.asList(
+                        new Exercise("Burpees", 3, 15),
+                        new Exercise("Kettlebell Squats", 3, 12)
+                )
+        ));
+
+        return new WorkoutPlan("Fettabbau", days);
     }
 }

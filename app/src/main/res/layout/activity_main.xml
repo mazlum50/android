@@ -35,21 +35,21 @@
         android:layout_marginTop="16dp"/>
 
     <RadioGroup
-        android:id="@+id/goalGroup"
+        android:id="@+id/goalRadioGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
         <RadioButton
-            android:id="@+id/goalCut"
+            android:id="@+id/radioMuscle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/goal_cut"/>
+            android:text="Muskelaufbau"/>
 
         <RadioButton
-            android:id="@+id/goalBulk"
+            android:id="@+id/radioFatLoss"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/goal_bulk"/>
+            android:text="Fettabbau"/>
     </RadioGroup>
     <Button
         android:id="@+id/startButton"

@@ -1,33 +1,22 @@
 package de.mazlum.erstapp.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 public class WorkoutPlan implements Serializable {
     private String title;
-    private String frequency;
-    private String focus;
-    private String notes;
+    private List<WorkoutDay> days;
 
-    public WorkoutPlan(String title, String frequency, String focus, String notes) {
+    public WorkoutPlan(String title, List<WorkoutDay> days) {
         this.title = title;
-        this.frequency = frequency;
-        this.focus = focus;
-        this.notes = notes;
+        this.days = days;
     }
 
     public String getTitle() {
         return title;
     }
 
-    public String getFrequency() {
-        return frequency;
-    }
-
-    public String getFocus() {
-        return focus;
-    }
-
-    public String getNotes() {
-        return notes;
+    public List<WorkoutDay> getDays() {
+        return days;
     }
 }

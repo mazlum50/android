@@ -1,4 +1,4 @@
-package de.mazlum.erstapp.logic;
+package de.mazlum.erstapp.model;
 
 public enum VmpCategory {
     MUSCLE_BUILD ,

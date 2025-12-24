@@ -1,20 +1,17 @@
 package de.mazlum.erstapp;
 
-import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-
-import de.mazlum.erstapp.logic.VmpCategory;
-import de.mazlum.erstapp.logic.WorkoutLogic;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import de.mazlum.erstapp.model.WorkoutPlan;
+import de.mazlum.erstapp.ui.adapter.WorkoutDayAdapter;
 
 public class WorkoutActivity extends AppCompatActivity {
     private TextView titleText;
-    private TextView frequencyText;
-    private TextView focusText;
-    private TextView notesText;
 
 
 
@@ -22,16 +19,22 @@ public class WorkoutActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_workout);
+
         titleText = findViewById(R.id.titleText);
-        frequencyText = findViewById(R.id.frequencyText);
-        focusText = findViewById(R.id.focusText);
-        notesText = findViewById(R.id.notesText);
-        WorkoutPlan workoutPlan = (WorkoutPlan) getIntent().getSerializableExtra("WORKOUT_PLAN");
-        if (workoutPlan != null) {
-           titleText.setText(workoutPlan.getTitle());
-           frequencyText.setText(workoutPlan.getFrequency());
-           focusText.setText(workoutPlan.getFocus());
-           notesText.setText(workoutPlan.getNotes());
+
+        RecyclerView recyclerView = findViewById(R.id.daysRecyclerView);
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        WorkoutPlan plan =
+                (WorkoutPlan) getIntent().getSerializableExtra("WORKOUT_PLAN");
+        Log.d("Debug","Plan " + plan);
+        if (plan != null) {
+            titleText.setText(plan.getTitle());
+
+            WorkoutDayAdapter adapter =
+                    new WorkoutDayAdapter(plan.getDays());
+
+            recyclerView.setAdapter(adapter);
         }
     }
 
