@@ -4,6 +4,8 @@ import androidx.room.ColumnInfo;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import de.mazlum.erstapp.model.UserGoal;
+
 @Entity(tableName = "users")
 public class User {
     @PrimaryKey(autoGenerate = true)
@@ -14,9 +16,12 @@ public class User {
     @ColumnInfo(name = "height")
     private int height;
     @ColumnInfo(name = "goal")
-    private String goal;
+    private UserGoal goal;
+    @ColumnInfo(name = "trainingDays")
+    private int trainingDays;
 
-    public User(String goal, int height, int weight) {
+
+    public User(UserGoal goal, int height, int weight) {
         this.goal = goal;
         this.height = height;
         this.weight = weight;
@@ -46,11 +51,19 @@ public class User {
         this.height = height;
     }
 
-    public String getGoal() {
+    public UserGoal getGoal() {
         return goal;
     }
 
-    public void setGoal(String goal) {
+    public void setGoal(UserGoal goal) {
         this.goal = goal;
+    }
+
+    public int getTrainingDays() {
+        return trainingDays;
+    }
+
+    public void setTrainingDays(int trainingDays) {
+        this.trainingDays = trainingDays;
     }
 }

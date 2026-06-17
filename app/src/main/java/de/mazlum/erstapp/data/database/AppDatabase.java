@@ -5,15 +5,17 @@ import android.content.Context;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 
 import de.mazlum.erstapp.data.dao.UserDao;
 import de.mazlum.erstapp.data.entity.User;
 
 @Database(
         entities = {User.class},
-        version = 1,
+        version = 1 ,
         exportSchema = false
 )
+@TypeConverters(Converters.class)
 public abstract class AppDatabase extends RoomDatabase {
     private static AppDatabase instance;
     public abstract UserDao userDao();

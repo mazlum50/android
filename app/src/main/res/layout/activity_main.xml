@@ -28,12 +28,6 @@
         android:inputType="number"
         android:layout_marginTop="12dp"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/goal_label"
-        android:layout_marginTop="16dp"/>
-
     <RadioGroup
         android:id="@+id/goalRadioGroup"
         android:layout_width="wrap_content"
@@ -50,6 +44,46 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Fettabbau"/>
+    </RadioGroup>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Wie viele Trainingstage pro Woche?"
+        android:textSize="16sp"
+        android:layout_marginTop="16dp"/>
+
+    <RadioGroup
+        android:id="@+id/daysRadioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:id="@+id/radio2Days"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2 Tage"/>
+        <RadioButton
+            android:id="@+id/radio3Days"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3 Tage"/>
+
+        <RadioButton
+            android:id="@+id/radio4Days"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4 Tage"/>
+
+        <RadioButton
+            android:id="@+id/radio5Days"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5 Tage"/>
+
+        <RadioButton
+            android:id="@+id/radio6Days"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="6 Tage"/>
     </RadioGroup>
     <Button
         android:id="@+id/startButton"

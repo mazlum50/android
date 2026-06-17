@@ -10,84 +10,187 @@ import de.mazlum.erstapp.model.WorkoutDay;
 import de.mazlum.erstapp.model.WorkoutPlan;
 
 public class WorkoutLogic {
-    public static WorkoutPlan getWorkoutPlan(VmpCategory category) {
+
+    // قمنا بإضافة باراميتر trainingDays هنا
+    public static WorkoutPlan getWorkoutPlan(VmpCategory category, int trainingDays) {
 
         switch (category) {
-
             case MUSCLE_BUILD:
-                return buildMusclePlan();
+                return buildMusclePlan(trainingDays);
 
             case RECOMP:
-                return buildRecompPlan();
+                return buildRecompPlan(trainingDays);
 
             case FAT_LOSS:
-                return buildFatLossPlan();
+                return buildFatLossPlan(trainingDays);
 
             default:
                 throw new IllegalStateException("Unknown VMP category");
         }
     }
 
-    private static WorkoutPlan buildMusclePlan() {
-
+    private static WorkoutPlan buildMusclePlan(int daysCount) {
         List<WorkoutDay> days = new ArrayList<>();
 
-        days.add(new WorkoutDay(
-                "Tag 1 – Ganzkörper",
-                Arrays.asList(
-                        new Exercise("Kniebeugen", 4, 8),
-                        new Exercise("Bankdrücken", 4, 8),
-                        new Exercise("Rudern", 3, 10)
-                )
-        ));
+        if (daysCount == 2) {
+            // يومين فقط: يطبع يومين فقط بشكل صارم
+            days.add(new WorkoutDay("Tag 1 – Ganzkörper (A)", Arrays.asList(
+                    new Exercise("Kniebeugen", 4, 8),
+                    new Exercise("Bankdrücken", 4, 8),
+                    new Exercise("Rudern", 3, 10)
+            )));
+            days.add(new WorkoutDay("Tag 2 – Ganzkörper (B)", Arrays.asList(
+                    new Exercise("Kreuzheben", 3, 5),
+                    new Exercise("Schulterdrücken", 4, 8),
+                    new Exercise("Klimmzüge", 3, 8)
+            )));
+        } else if (daysCount == 3) {
+            // 3 أيام: يطبع ثلاثة أيام
+            days.add(new WorkoutDay("Tag 1 – Ganzkörper (A)", Arrays.asList(
+                    new Exercise("Kniebeugen", 4, 8),
+                    new Exercise("Bankdrücken", 4, 8),
+                    new Exercise("Rudern", 3, 10)
+            )));
+            days.add(new WorkoutDay("Tag 2 – Ganzkörper (B)", Arrays.asList(
+                    new Exercise("Kreuzheben", 3, 5),
+                    new Exercise("Schulterdrücken", 4, 8),
+                    new Exercise("Klimmzüge", 3, 8)
+            )));
+            days.add(new WorkoutDay("Tag 3 – Ganzkörper (C)", Arrays.asList(
+                    new Exercise("Ausfallschritte", 3, 10),
+                    new Exercise("Schrägbankdrücken", 3, 10),
+                    new Exercise("Latzug", 3, 10)
+            )));
+        } else {
+            // 4 أيام أو أكثر: Oberkörper / Unterkörper كما هي في ملفك
+            days.add(new WorkoutDay("Tag 1 – Oberkörper (A)", Arrays.asList(
+                    new Exercise("Bankdrücken", 4, 8),
+                    new Exercise("Rudern", 4, 8)
+            )));
+            days.add(new WorkoutDay("Tag 2 – Unterkörper (A)", Arrays.asList(
+                    new Exercise("Kniebeugen", 4, 8),
+                    new Exercise("Rumänisches Kreuzheben", 4, 10)
+            )));
+            days.add(new WorkoutDay("Tag 3 – Oberkörper (B)", Arrays.asList(
+                    new Exercise("Schrägbankdrücken", 4, 8),
+                    new Exercise("Klimmzüge", 4, 8)
+            )));
+            days.add(new WorkoutDay("Tag 4 – Unterkörper (B)", Arrays.asList(
+                    new Exercise("Beinpresse", 4, 10),
+                    new Exercise("Beinstrecker", 3, 12)
+            )));
+        }
 
-        days.add(new WorkoutDay(
-                "Tag 2 – Ganzkörper",
-                Arrays.asList(
-                        new Exercise("Kreuzheben", 3, 5),
-                        new Exercise("Schulterdrücken", 4, 8),
-                        new Exercise("Klimmzüge", 3, 8)
-                )
-        ));
-
-        return new WorkoutPlan("Muskelaufbau", days);
+        return new WorkoutPlan("Muskelaufbau (" + daysCount + " Tage)", days);
     }
 
-    private static WorkoutPlan buildRecompPlan() {
-
+    private static WorkoutPlan buildRecompPlan(int daysCount) {
         List<WorkoutDay> days = new ArrayList<>();
 
-        days.add(new WorkoutDay(
-                "Tag 1 – Oberkörper",
-                Arrays.asList(
-                        new Exercise("Bankdrücken", 4, 8),
-                        new Exercise("Latzug", 3, 10)
-                )
-        ));
+        if (daysCount == 2) {
+            // يومين فقط: يطبع يومين فقط بشكل صارم
+            days.add(new WorkoutDay("Tag 1 – Ganzkörper (A)", Arrays.asList(
+                    new Exercise("Kniebeugen", 4, 8),
+                    new Exercise("Bankdrücken", 4, 8),
+                    new Exercise("Rudern", 3, 10)
+            )));
+            days.add(new WorkoutDay("Tag 2 – Ganzkörper (B)", Arrays.asList(
+                    new Exercise("Kreuzheben", 3, 5),
+                    new Exercise("Schulterdrücken", 4, 8),
+                    new Exercise("Klimmzüge", 3, 8)
+            )));
+        } else if (daysCount == 3) {
+            // 3 أيام: يطبع ثلاثة أيام
+            days.add(new WorkoutDay("Tag 1 – Ganzkörper (A)", Arrays.asList(
+                    new Exercise("Kniebeugen", 4, 8),
+                    new Exercise("Bankdrücken", 4, 8),
+                    new Exercise("Rudern", 3, 10)
+            )));
+            days.add(new WorkoutDay("Tag 2 – Ganzkörper (B)", Arrays.asList(
+                    new Exercise("Kreuzheben", 3, 5),
+                    new Exercise("Schulterdrücken", 4, 8),
+                    new Exercise("Klimmzüge", 3, 8)
+            )));
+            days.add(new WorkoutDay("Tag 3 – Ganzkörper (C)", Arrays.asList(
+                    new Exercise("Ausfallschritte", 3, 10),
+                    new Exercise("Schrägbankdrücken", 3, 10),
+                    new Exercise("Latzug", 3, 10)
+            )));
+        } else {
+            // 4 أيام أو أكثر: Oberkörper / Unterkörper كما هي في ملفك
+            days.add(new WorkoutDay("Tag 1 – Oberkörper (A)", Arrays.asList(
+                    new Exercise("Bankdrücken", 4, 8),
+                    new Exercise("Rudern", 4, 8)
+            )));
+            days.add(new WorkoutDay("Tag 2 – Unterkörper (A)", Arrays.asList(
+                    new Exercise("Kniebeugen", 4, 8),
+                    new Exercise("Rumänisches Kreuzheben", 4, 10)
+            )));
+            days.add(new WorkoutDay("Tag 3 – Oberkörper (B)", Arrays.asList(
+                    new Exercise("Schrägbankdrücken", 4, 8),
+                    new Exercise("Klimmzüge", 4, 8)
+            )));
+            days.add(new WorkoutDay("Tag 4 – Unterkörper (B)", Arrays.asList(
+                    new Exercise("Beinpresse", 4, 10),
+                    new Exercise("Beinstrecker", 3, 12)
+            )));
+        }
 
-        days.add(new WorkoutDay(
-                "Tag 2 – Unterkörper",
-                Arrays.asList(
-                        new Exercise("Beinpresse", 4, 10),
-                        new Exercise("Beinbeuger", 3, 12)
-                )
-        ));
-
-        return new WorkoutPlan("Rekomposition", days);
+        return new WorkoutPlan("Rekomposition (" + daysCount + " Tage)", days);
     }
 
-    private static WorkoutPlan buildFatLossPlan() {
-
+    private static WorkoutPlan buildFatLossPlan(int daysCount) {
         List<WorkoutDay> days = new ArrayList<>();
 
-        days.add(new WorkoutDay(
-                "Tag 1 – Zirkel",
-                Arrays.asList(
-                        new Exercise("Burpees", 3, 15),
-                        new Exercise("Kettlebell Squats", 3, 12)
-                )
-        ));
+        if (daysCount == 2) {
+            // يومين فقط: يطبع يومين فقط بشكل صارم
+            days.add(new WorkoutDay("Tag 1 – Ganzkörper (A)", Arrays.asList(
+                    new Exercise("Kniebeugen", 4, 8),
+                    new Exercise("Bankdrücken", 4, 8),
+                    new Exercise("Rudern", 3, 10)
+            )));
+            days.add(new WorkoutDay("Tag 2 – Ganzkörper (B)", Arrays.asList(
+                    new Exercise("Kreuzheben", 3, 5),
+                    new Exercise("Schulterdrücken", 4, 8),
+                    new Exercise("Klimmzüge", 3, 8)
+            )));
+        } else if (daysCount == 3) {
+            // 3 أيام: يطبع ثلاثة أيام
+            days.add(new WorkoutDay("Tag 1 – Ganzkörper (A)", Arrays.asList(
+                    new Exercise("Kniebeugen", 4, 8),
+                    new Exercise("Bankdrücken", 4, 8),
+                    new Exercise("Rudern", 3, 10)
+            )));
+            days.add(new WorkoutDay("Tag 2 – Ganzkörper (B)", Arrays.asList(
+                    new Exercise("Kreuzheben", 3, 5),
+                    new Exercise("Schulterdrücken", 4, 8),
+                    new Exercise("Klimmzüge", 3, 8)
+            )));
+            days.add(new WorkoutDay("Tag 3 – Ganzkörper (C)", Arrays.asList(
+                    new Exercise("Ausfallschritte", 3, 10),
+                    new Exercise("Schrägbankdrücken", 3, 10),
+                    new Exercise("Latzug", 3, 10)
+            )));
+        } else {
+            // 4 أيام أو أكثر: Oberkörper / Unterkörper كما هي في ملفك
+            days.add(new WorkoutDay("Tag 1 – Oberkörper (A)", Arrays.asList(
+                    new Exercise("Bankdrücken", 4, 8),
+                    new Exercise("Rudern", 4, 8)
+            )));
+            days.add(new WorkoutDay("Tag 2 – Unterkörper (A)", Arrays.asList(
+                    new Exercise("Kniebeugen", 4, 8),
+                    new Exercise("Rumänisches Kreuzheben", 4, 10)
+            )));
+            days.add(new WorkoutDay("Tag 3 – Oberkörper (B)", Arrays.asList(
+                    new Exercise("Schrägbankdrücken", 4, 8),
+                    new Exercise("Klimmzüge", 4, 8)
+            )));
+            days.add(new WorkoutDay("Tag 4 – Unterkörper (B)", Arrays.asList(
+                    new Exercise("Beinpresse", 4, 10),
+                    new Exercise("Beinstrecker", 3, 12)
+            )));
+        }
 
-        return new WorkoutPlan("Fettabbau", days);
+        return new WorkoutPlan("Fettabbau (" + daysCount + " Tage)", days);
     }
 }
