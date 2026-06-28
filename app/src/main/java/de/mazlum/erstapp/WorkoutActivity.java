@@ -10,6 +10,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import de.mazlum.erstapp.logic.CalorieCalculatorActivity;
 import de.mazlum.erstapp.model.WorkoutPlan;
 import de.mazlum.erstapp.ui.adapter.WorkoutDayAdapter;
 
@@ -60,13 +62,8 @@ public class WorkoutActivity extends AppCompatActivity {
         // 2️⃣ Kalorienrechner-Button: Navigiert zur Aktivität für die Kalorienberechnung
         if (calculateCaloriesButton != null) {
             calculateCaloriesButton.setOnClickListener(v -> {
-                // TODO: Ersetzen Sie 'CalorieCalculatorActivity.class' mit Ihrer tatsächlichen Activity für Kalorien
-                // Intent intent = new Intent(WorkoutActivity.this, CalorieCalculatorActivity.class);
-                // startActivity(intent);
-
-                Toast.makeText(WorkoutActivity.this,
-                        "Kalorienrechner wird geöffnet...",
-                        Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(WorkoutActivity.this, CalorieCalculatorActivity.class);
+                startActivity(intent);
             });
         }
     }

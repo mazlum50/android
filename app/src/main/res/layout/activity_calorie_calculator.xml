@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="24dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Geschlecht auswählen"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp" />
+
+    <RadioGroup
+        android:id="@+id/genderRadioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="24dp">
+
+        <RadioButton
+            android:id="@+id/radioMale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Männlich"
+            android:textSize="16sp"
+            android:layout_marginEnd="24dp" />
+
+        <RadioButton
+            android:id="@+id/radioFemale"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Weiblich"
+            android:textSize="16sp" />
+    </RadioGroup>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Aktivitätsniveau auswählen"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_marginBottom="16dp" />
+
+    <RadioGroup
+        android:id="@+id/activityRadioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="24dp">
+
+        <RadioButton
+            android:id="@+id/radioSedentary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sitzend (Wenig oder kein Training)"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/radioLowActivity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Leicht aktiv (Leichtes Training 1-3 Tage/Woche)"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/radioMediumActivity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Moderat aktiv (Training 3-5 Tage/Woche)"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/radioHighActivity"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Sehr aktiv (Hartes Training 6-7 Tage/Woche)"
+            android:textSize="16sp" />
+    </RadioGroup>
+
+    <Button
+        android:id="@+id/calculateButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Kalorien berechnen"
+        android:layout_marginBottom="24dp" />
+
+    <TextView
+        android:id="@+id/resultTextView"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:textSize="16sp"
+        android:textStyle="italic"
+        android:textColor="#333333"
+        android:gravity="center"
+        android:text="Das Ergebnis wird hier angezeigt..." />
+
+    <Button
+        android:id="@+id/backToWorkoutButton"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Zurück zum Trainingsplan"
+        style="?android:attr/borderlessButtonStyle" />
+
+</LinearLayout>
