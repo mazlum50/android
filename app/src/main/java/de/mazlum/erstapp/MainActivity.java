@@ -23,14 +23,14 @@ import de.mazlum.erstapp.model.WorkoutPlan;
 
 public class MainActivity extends AppCompatActivity {
 
-    // UI
+    // UI-Komponenten
     private EditText weightInput;
     private EditText heightInput;
     private RadioGroup goalRadioGroup;
     private RadioGroup daysRadioGroup;
     private Button startButton;
 
-    // Thread executor (واحد يكفي الآن)
+    // Thread Executor für Hintergrundprozesse (z.B. Datenbankzugriffe)
     private ExecutorService executor = Executors.newSingleThreadExecutor();
 
     @Override
@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         startButton.setOnClickListener(v -> onStartClicked());
     }
 
-    // ================= UI =================
+    // ================= UI-Initialisierung =================
 
     private void initViews() {
         weightInput = findViewById(R.id.weightInput);
@@ -54,11 +54,11 @@ public class MainActivity extends AppCompatActivity {
         daysRadioGroup = findViewById(R.id.daysRadioGroup);
     }
 
-    // ================= FLOW =================
+    // ================= Workflow-Logik =================
 
     private void onStartClicked() {
 
-        // Validation
+        // Validierung der Eingabefelder
         if (weightInput.getText().toString().isEmpty()
                 || heightInput.getText().toString().isEmpty()) {
 
@@ -77,12 +77,12 @@ public class MainActivity extends AppCompatActivity {
         }
         int daysCheckedId = daysRadioGroup.getCheckedRadioButtonId();
         if (daysCheckedId == -1){
-            Toast.makeText(this ,"Bitte Trainingstage auswählen ",
+            Toast.makeText(this ,"Bitte Trainingstage auswählen",
                     Toast.LENGTH_SHORT).show();
             return;
         }
 
-        // Parse input
+        // Benutzereingaben parsen
         int weight = Integer.parseInt((weightInput.getText().toString()));
         int height = Integer.parseInt(heightInput.getText().toString());
 
@@ -92,32 +92,29 @@ public class MainActivity extends AppCompatActivity {
         } else {
             goal = UserGoal.FAT_LOSS;
         }
+
         int trainingDays;
         if (daysCheckedId == R.id.radio2Days){
             trainingDays = 2;
-        }
-        else if (daysCheckedId == R.id.radio3Days) {
+        } else if (daysCheckedId == R.id.radio3Days) {
             trainingDays = 3;
-        }
-        else if (daysCheckedId == R.id.radio4Days) {
+        } else if (daysCheckedId == R.id.radio4Days) {
             trainingDays = 4;
-        }
-        else if (daysCheckedId == R.id.radio5Days) {
+        } else if (daysCheckedId == R.id.radio5Days) {
             trainingDays = 5;
-        }
-        else if (daysCheckedId == R.id.radio6Days) {
+        } else if (daysCheckedId == R.id.radio6Days) {
             trainingDays = 6;
-        }else {
-            trainingDays = 3;
+        } else {
+            trainingDays = 3; // Standard-Fallback
         }
 
-        // 1️⃣ حفظ المستخدم
+        // 1️⃣ Benutzerdaten in der lokalen Datenbank speichern
         saveUser(weight, height, goal, trainingDays);
 
-        // 2️⃣ حساب VMP
+        // 2️⃣ VMP-Kategorie berechnen (BMI- und Ziel-basiert)
         VmpCategory vmpCategory = VmpCalculator.calculate(goal, weight, height);
 
-        // 3️⃣ بناء خطة التدريب
+        // 3️⃣ Trainingsplan basierend auf der Kategorie und den Tagen erstellen
         WorkoutPlan plan = WorkoutLogic.getWorkoutPlan(vmpCategory ,trainingDays);
 
         if (plan == null) {
@@ -127,16 +124,15 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        // 4️⃣ الانتقال لصفحة الخطة
+        // 4️⃣ Weiterleitung zur WorkoutActivity und Übergabe des Trainingsplans
         Intent intent = new Intent(this, WorkoutActivity.class);
         intent.putExtra("WORKOUT_PLAN", plan);
         startActivity(intent);
     }
 
-    // ================= ROOM =================
+    // ================= Room-Datenbankverwaltung =================
 
     private void saveUser(int weight, int height, UserGoal goal, int trainingDays) {
-
         executor.execute(() -> {
             AppDatabase db = AppDatabase.getInstance(getApplicationContext());
             UserDao userDao = db.userDao();
@@ -148,7 +144,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void loadUser() {
-
         executor.execute(() -> {
             try {
                 AppDatabase db = AppDatabase.getInstance(getApplicationContext());
@@ -157,13 +152,13 @@ public class MainActivity extends AppCompatActivity {
                 User user = userDao.getUser();
                 if (user == null) return;
 
+                // UI-Update auf dem Hauptthread ausführen
                 runOnUiThread(() -> {
                     if (weightInput != null) {
                         weightInput.setText(String.valueOf(user.getWeight()));
                     }
                     if (heightInput != null) {
                         heightInput.setText(String.valueOf(user.getHeight()));
-
                     }
                     if (goalRadioGroup != null) {
                         if (user.getGoal() == UserGoal.MUSCLE) {
@@ -191,12 +186,10 @@ public class MainActivity extends AppCompatActivity {
                                 break;
                         }
                     }
-
                 });
             } catch (Exception e) {
                 e.printStackTrace();
             }
         });
     }
-
 }
