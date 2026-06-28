@@ -1,5 +1,6 @@
 package de.mazlum.erstapp.logic;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.RadioGroup;
@@ -128,7 +129,7 @@ public class CalorieCalculatorActivity extends AppCompatActivity {
         }
 
         // Ergebnis auf dem Bildschirm anzeigen
-        String resultMessage = String.format(
+        @SuppressLint("DefaultLocale") String resultMessage = String.format(
                 "Ihr Grundumsatz: %.0f kcal\n" +
                         "Erhaltungskalorien: %.0f kcal\n\n" +
                         "Empfohlene Tageszufuhr:\n%.0f kcal\n\n%s",
